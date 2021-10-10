@@ -3,7 +3,7 @@
 ### 📃 Descrição
 O objetivo do projeto é desenvolver **os esquemas conceitual, lógico e físico** de um banco de dados para um **Sistema de Controle de Estoque e Venda** de produtos de um estabelecimento comercial de **instrumentos musicais**.
 
-#### Requisitos do básicos do sistema
+#### Requisitos básicos do sistema
 - ☑️ Clientes
 - ☑️ Fornecedores
 - ☑️ Produtos
