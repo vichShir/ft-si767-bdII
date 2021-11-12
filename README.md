@@ -12,8 +12,13 @@ O objetivo do projeto é desenvolver **os esquemas conceitual, lógico e físico
 ### 📚 Conteúdo
 - ✔️ Projeto Conceitual (24/09/2021)
 - ✔️ Atividades (05/11/2021)
-- Projeto Lógico
-- Projeto Físico
+- ✔️ Projeto Lógico (12/11/2021)
+- ✔️ Projeto Físico (12/11/2021)
+  - ✔️ Tables
+  - ✔️ Views
+  - ✔️ Stored Procedures
+  - ✔️ Triggers
+
 
 ### 🌐 Motivação
 As atividades desenvolvidas em aula e o projeto compõem a nota final da disciplina de **SI767 - Banco de Dados II** (2º Semestre 2021) na Faculdade de Tecnologia (FT) UNICAMP.
