@@ -2,134 +2,87 @@
 
 Esquema lógico do banco de dados do sistema, modelado utilizando o Modelo Relacional, com a indicação de todas as restrições de integridade - chaves primárias, secundárias (se houver) e estrangeiras.
 
+**pessoa = { <u>codpessoa</u>, nome, endereco }**
 
+**fornecedor = { <u>codpessoa</u>, <u>cnpj</u>, representante }**
 
-pessoa = { <u>codpessoa</u>, nome, endereco }
+    codpessoa - chave estrangeira referenciando pessoa
 
+**pessoa_fisica = { <u>codpessoa</u>, <u>cpf</u>, dtnascimento, email, telefone }**
 
+    codpessoa - chave estrangeira referenciando pessoa
 
-fornecedor = { <u>codpessoa</u>, <u>cnpj</u>, representante } 
+**cliente = { <u>cpf</u>, numcompras }**
 
-  codpessoa - chave estrangeira referenciando pessoa
+    cpf - chave estrangeira referenciando pessoa_fisica
 
+**colaborador = { <u>cpf</u>, numvendas, salario, comissao, login, senha }**
 
+    cpf - chave estrangeira referenciando pessoa_fisica
 
-pessoa_fisica = { <u>codpessoa</u>, <u>cpf</u>, dtnascimento, email, telefone }
+**produto = { <u>codproduto</u>, nome, preco, qtdestoque, marca, modelo, garantia }**
 
-  codpessoa - chave estrangeira referenciando pessoa
+**notafiscalvenda = { <u>numnota</u>, valortotal, data, cod_cli, cod_colab }**
 
+    cod_cli - chave estrangeira referenciando cliente
+    cod_colab - chave estrangeira referenciando colaborador
 
+**itemnotafiscalvenda = { <u>numnota</u>, <u>codproduto</u>, quantidade }**
 
-cliente = { <u>cpf</u>, numcompras }
+    numnota - chave estrangeira referenciando notafiscalvenda
+    codproduto - chave estrangeira referenciando produto
 
-  cpf - chave estrangeira referenciando pessoa_fisica
+**notafiscalcompra = { <u>numnota</u>, valortotal, data, cod_forn }**
 
+    cod_forn - chave estrangeira referenciando fornecedor
 
+**itemnotafiscalcompra = { <u>numnota</u>, <u>codproduto</u>, quantidade }**
 
-colaborador = { <u>cpf</u>, numvendas, salario, comissao, login, senha }
+    numnota - chave estrangeira referenciando notafiscalcompra
+    codproduto - chave estrangeira referenciando produto
 
-  cpf - chave estrangeira referenciando pessoa_fisica
+**fatura = { <u>numfatura</u>, dtvencimento, dtpagamento, valor, numnota_cli, numnota_forn }**
 
+    numnota_cli - chave estrangeira referenciando notafiscalvenda
+    numnota_forn  - chave estrangeira referenciando notafiscalcompra
 
+**faturapaga = { <u>numfatura</u>, dtvencimento, dtpagamento, valor, numnota_cli, numnota_forn }**
 
-produto = { <u>codproduto</u>, nome, preco, qtdestoque, marca, modelo, garantia }
+    numnota_cli - chave estrangeira referenciando notafiscalvenda
+    numnota_forn  - chave estrangeira referenciando notafiscalcompra
 
+**instrumento = { <u>codproduto</u>, cor, tipoinstrumento, peso }**
 
+    codproduto = chave estrangeira referenciando produto
 
-notafiscalvenda = { <u>numnota</u>, valortotal, data, cod_cli, cod_colab }
+**acessorio = { <u>codproduto</u>, tipoacessorio }**
 
-  cod_cli - chave estrangeira referenciando cliente
+    codproduto = chave estrangeira referenciando produto
 
-  cod_colab - chave estrangeira referenciando colaborador
+**corda = { <u>codproduto</u>, numcordas, numtrastes, tipocorda, sonoridade }**
 
+    codproduto = chave estrangeira referenciando instrumento
 
+**percussao = { <u>codproduto</u>, tampolegadas, material, sonoridade }**
 
-itemnotafiscalvenda = { <u>numnota</u>, <u>codproduto</u>, quantidade }
+    codproduto = chave estrangeira referenciando instrumento
 
-  numnota - chave estrangeira referenciando notafiscalvenda
+**teclado = { <u>codproduto</u>, numteclas, polifoniamax, metronomo, sonoridade }**
 
-  codproduto - chave estrangeira referenciando produto
+    codproduto = chave estrangeira referenciando instrumento
 
+**sopro = { <u>codproduto</u>, numfurosbocal, afinacao, acabamentoboquilha }**
 
+    codproduto = chave estrangeira referenciando instrumento
 
-notafiscalcompra = { <u>numnota</u>, valortotal, data, cod_forn }
+**encordoamento = { <u>codproduto</u>, numcordas, material, escala, tensao }**
 
-  cod_forn - chave estrangeira referenciando fornecedor
+    codproduto = chave estrangeira referenciando acessorio 
 
+**pedal = { <u>codproduto</u>, tipopedal, digitalanalogico, tensaoalimentacao, consumoenergia }**
 
+    codproduto = chave estrangeira referenciando acessorio 
 
-itemnotafiscalcompra = { <u>numnota</u>, <u>codproduto</u>, quantidade }
+**palheta = { <u>codproduto</u>, espessura, material }**
 
-  numnota - chave estrangeira referenciando notafiscalcompra
-
-  codproduto - chave estrangeira referenciando produto
-
-
-
-fatura = { <u>numfatura</u>, dtvencimento, dtpagamento, valor, numnota_cli, numnota_forn }
-
-  numnota_cli - chave estrangeira referenciando notafiscalvenda
-
-  numnota_forn  - chave estrangeira referenciando notafiscalcompra
-
-
-
-faturapaga = { <u>numfatura</u>, dtvencimento, dtpagamento, valor, numnota_cli, numnota_forn }
-
-  numnota_cli - chave estrangeira referenciando notafiscalvenda
-
-  numnota_forn  - chave estrangeira referenciando notafiscalcompra
-
-
-
-instrumento = { <u>codproduto</u>, cor, tipoinstrumento, peso }
-
-  codproduto = chave estrangeira referenciando produto
-
-
-
-acessorio = { <u>codproduto</u>, tipoacessorio }
-
-  codproduto = chave estrangeira referenciando produto
-
-
-
-corda = { <u>codproduto</u>, numcordas, numtrastes, tipocorda, sonoridade }
-
-  codproduto = chave estrangeira referenciando instrumento
-
-
-
-percussao = { <u>codproduto</u>, tampolegadas, material, sonoridade }
-
-  codproduto = chave estrangeira referenciando instrumento
-
-
-
-teclado = { <u>codproduto</u>, numteclas, polifoniamax, metronomo, sonoridade }
-
-  codproduto = chave estrangeira referenciando instrumento
-
-
-
-sopro = { <u>codproduto</u>, numfurosbocal, afinacao, acabamentoboquilha }
-
-  codproduto = chave estrangeira referenciando instrumento
-
-
-
-encordoamento = { <u>codproduto</u>, numcordas, material, escala, tensao }
-
-  codproduto = chave estrangeira referenciando acessorio 
-
-
-
-pedal = { <u>codproduto</u>, tipopedal, digitalanalogico, tensaoalimentacao, consumoenergia }
-
-  codproduto = chave estrangeira referenciando acessorio 
-
-
-
-palheta = { <u>codproduto</u>, espessura, material }
-
-  codproduto = chave estrangeira referenciando acessorio
+    codproduto = chave estrangeira referenciando acessorio
